@@ -1,106 +1,68 @@
 {
-  "id": "expression",
-  "version": "1.0",
-  "name": "Workflow Expression example",
-  "constants" : {
-    "Dog" : {
-      "castellano" : "perro",
-      "leones": "perru",
-      "gallego" : "can",
-      "aragones" : "cocho",
-      "catalan" : "gos",
-      "vasco": "txakurra"
-    }    
-  },
-  "description": "An example of how to use a JQ expression assignment",
-  "start": "squareState",
-  "functions": [
-    {
-      "name": "sendQueryNew",
-      "operation": "specs/query-service.yml#sendQueryNew",
-      "type": "rest"
-    },
-    {
-      "name": "max",
-      "type": "expression",
-      "operation": "{max: .numbers | max_by(.x), min: .numbers | min_by(.y)}"
-    },
-    {
-      "name": "printMessage",
-      "type": "custom",
-      "operation": "sysout"
-    }
-  ],
-  "states": [
-    {
-      "name": "squareState",
-      "type": "operation",
-      "actions": [
-        {
-              "name": "myAction", "functionRef":{
-            "refName": {
-              "refName": "sendQueryNew",
+    "id": "jsongreet",
+    "version": "1.0",
+    "name": "Greeting workflow",
+    "description": "JSON based greeting workflow",
+    "start": "ChooseOnLanguage",
+    "functions": [
+      {
+        "name": "greetFunction",
+        "type": "custom",
+        "operation": "sysout"
+      }
+    ],
+    "states": [
+      {
+        "name": "ChooseOnLanguage",
+        "type": "switch",
+        "dataConditions": [
+          {
+            "condition": "${ .language == \"English\" }",
+            "transition": "GreetInEnglish"
+          },
+          {
+            "condition": "${ .language == \"Spanish\" }",
+            "transition": "GreetInSpanish"
+          }
+        ],
+        "defaultCondition": {
+          "transition": "GreetInEnglish"
+        }
+      },
+      {
+        "name": "GreetInEnglish",
+        "type": "inject",
+        "data": {
+          "greeting": "Hello from JSON Workflow, "
+        },
+        "transition": "GreetPerson"
+      },
+      {
+        "name": "GreetInSpanish",
+        "type": "inject",
+        "data": {
+          "greeting": "Saludos desde JSON Workflow, "
+        },
+        "transition": "GreetPerson"
+      },
+      {
+        "name": "GreetPerson",
+        "type": "operation",
+        "actions": [
+          {
+            "name": "greetAction",
+            "functionRef": {
+              "refName": "greetFunction",
               "arguments": {
-                "another": "",
-                "query": ""
+                "message": ".greeting+.name"
               }
             }
-          
-          },
-        },
-        {
-          "name": "maxAction",
-          "functionRef": {
-            "refName": "max"
-          },
-          "actionDataFilter": {
-             "results" : ".max.x", 
-             "toStateData" : ".number"
           }
+        ],
+        "end": {
+          "terminate": "true"
         }
-      ],
-      "transition": "finish"
-    },
-    {
-      "name": "finish",
-      "type": "operation",
-      "stateDataFilter": {
-        "input": "{result: .number}"
-      },
-      "actions": [
-        {
-          "name": "printAction",
-          "functionRef": {
-            "refName": "sendQuery",
-            "arguments": {
-              "processInstanceId": "",
-              "query": ""
-            }
-          }
-        },
-        {
-          "name": "printAction",
-          "functionRef": {
-            "refName": "sendQuery",
-            "arguments": {
-              "processInstanceId": "",
-              "query": ""
-            }
-          }
-        },
-        {
-          "name": "printAction",
-          "functionRef": {
-            "refName": "printMessage",
-            "arguments": {
-              "message": ".result"
-            }
-          }
-        }
-      ],
-      "end": {
-        "terminate": true
       }
-    }
-  ]
-}
+    ]
+  }
+  

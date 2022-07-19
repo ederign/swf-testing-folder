@@ -1,0 +1,6 @@
+{
+    "kogito.sw.automaticallyOpenDiagramEditorAlongsideTextEditor": "Open automatically",
+    "kogito.sw.serviceRegistryUrl": "https://bu98.serviceregistry.rhcloud.com/t/1b01fff1-e32d-436e-87f5-782b6f75560a/apis/registry/v2",
+    "kogito.swf.automaticallyOpenDiagramEditorAlongsideTextEditor": "Open automatically",
+    "kogito.swf.serviceRegistryUrl": "https://bu98.serviceregistry.rhcloud.com/t/1b01fff1-e32d-436e-87f5-782b6f75560a/apis/registry/v2"
+}

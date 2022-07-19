@@ -1,0 +1,4 @@
+<svg height="50" width="500">
+  <text x="0" y="15" fill="red">Could not convert markup to Workflow: Unrecognized field "specVersion" (class io.serverlessworkflow.api.Workflow), not marked as ignorable (15 known properties: "start", "expressionLang", "name", "metadata", "execTimeout", "extensions", "schemaVersion", "version", "events", "id", "description", "states", "retries", "keepActive", "functions"])
+ at [Source: (StringReader); line: 4, column: 23] (through reference chain: io.serverlessworkflow.api.Workflow["specVersion"])</text>
+</svg>
