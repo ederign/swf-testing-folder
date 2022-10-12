@@ -1,7 +1,7 @@
 {
   "id": "jsongreet",
   "version": "1.0",
-  "name": "Greeting workflow",
+  "name": "Greeting test",
   "description": "JSON based greeting workflow",
   "start": "ChooseOnLanguage",
   "functions": [
