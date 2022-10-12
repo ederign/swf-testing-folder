@@ -1,7 +1,7 @@
 {
   "id": "order_saga_error_workflow",
   "version": "1.0",
-  "name": "Order Fulfilment Workflow Saga example",
+  "name": "Test Fulfilment Workflow Saga example",
   "description": "An example of how to implement Saga for the Order Fulfilment example using Error Handling and Compensation",
   "errors" : [
     {
